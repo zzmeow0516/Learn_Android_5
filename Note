@@ -1,0 +1,30 @@
+一. ArrayAdapter
+ArrayAdapter是一种适配器，用于将数组或列表（List）数据绑定到ListView或Spinner等视图组件
+可以定义自己的XML布局文件来控制数据的显示方式
+
+常用构造方法：
+ArrayAdapter(Context context, int resource, List<T> objects)
+ArrayAdapter(Context context, int resource, int textViewResourceId, List<T> objects)
+
+构造方法中的参数解释：
+context：上下文，通常指当前的Activity或应用环境。
+resource：布局资源ID，指定了  每个列表项  使用的布局。
+textViewResourceId：（可选）如果布局中包含TextView，这个参数用来指定TextView的ID。
+objects：数据源，可以是数组或者List集合
+
+在activity中的示例代码步骤：
+1.准备集合数据
+    private val fruitlist = ArrayList<Frutis>()             //这里的Fruits类是我们自己新建的，包含 name 和 fruitImageId 两个数据
+2.获取listview的实例     val listview: ListView = findViewById(R.id.listview1)
+3.创建ArrayAdapter      val adapter = FruitAdapter(this, R.layout.fruit_item, fruitList)      //这里其实已经用到了自定义布局和自定义adapter，在下面进行详细解释
+4.将adapter传递给listview   listview.adapter = adapter
+
+使用  自定义布局 的情况下展示每一个列表项：
+1. 编写自定义xml布局，我们这里写的是fruit_item.xml，包括一个ImageView和一个TextView
+
+使用 自定义ArrayAdapter ：
+1. 创建一个新的adapter: class fruitadapter(...) : ArrayAdapter(...) { ... }
+2. override getView()
+    2.1 使用LayoutInflater为子项加载布局
+    2.2 获取实例
+    2.3 写入元素
