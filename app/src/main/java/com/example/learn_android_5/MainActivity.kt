@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFruits() {
-        repeat(3) {
+        repeat(1000) {
             fruitList.add(Fruits("Apple", R.drawable.apple_pic))
             fruitList.add(Fruits("Banana", R.drawable.banana_pic))
             fruitList.add(Fruits("Orange", R.drawable.orange_pic))

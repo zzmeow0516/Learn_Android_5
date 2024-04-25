@@ -28,3 +28,25 @@ objects：数据源，可以是数组或者List集合
     2.1 使用LayoutInflater为子项加载布局
     2.2 获取实例
     2.3 写入元素
+
+----------------------------------------
+二. findViewById:
+在需要调用findViewById来获取控件的时候，
+1. 如果是在 Activity 内，可以直接调用findViewById，因为Activity的setContextView已经加载过布局了，我们通过findViewById需要找的控件肯定是在这个 加载过的布局当中
+所以可以直接调用（其实是调用ACtivity类的findViewById方法）
+2. 如果不是在Activity内，而是在一个Fragment / 自定义ViewGroup / 特定View 中，我们需要通过一个具体的view实例来调用findViewById，
+在本例中，写的是
+view = LayoutInflater.from(context).inflate(resourceId, parent, false)
+val fruitImage: ImageView = view.findViewById(R.id.fruitImage)
+
+
+-------------------------------------------
+三. 在Kotlin中，当构造器参数前使用val或var，这些参数会变成类的属性，可以像访问其他属性一样访问它们
+inner class ViewHolder(val fruitImage: ImageView, val fruitName: TextView)
+val viewholder: ViewHolder
+val fruitImage: ImageView = view.findViewById(R.id.fruitImage)
+val fruitName: TextView = view.findViewById(R.id.fruitName)
+viewholder = ViewHolder(fruitImage, fruitName)
+
+viewholder.fruitImage.setImageResource(fruit.fruitImageId)
+viewholder.fruitName.text = fruit.name
