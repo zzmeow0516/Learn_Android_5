@@ -1,8 +1,10 @@
 package com.example.learn_android_5
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -37,6 +39,16 @@ class MainActivity : AppCompatActivity() {
         val adapter = FruitAdapter(this, R.layout.fruit_item, fruitList)
         val listview: ListView = findViewById(R.id.listView1)
         listview.adapter = adapter
+
+        //setOnItemClickListener接收一个OnItemClickListener参数，这个参数其实是一个java单抽象方法接口
+        //因为我们在这里直接用到了Java函数式API,
+        //OnItemClickListener接口的唯一方法OnItemClick的参数就是下面四个
+        //没有用到的参数可以直接用 _ 代替，这里为了突出参数就没有代替
+        listview.setOnItemClickListener { parent, view, position, id ->
+            view.setBackgroundColor(Color.RED)
+            val fruitItem = fruitList[position]
+            Toast.makeText(this, fruitItem.name, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initFruits() {
